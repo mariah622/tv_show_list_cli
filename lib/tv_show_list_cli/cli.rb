@@ -2,6 +2,7 @@ class CLI
 
     def start
         puts "Welcome! We are TV shows. What is your name?"
+        API.get_data
         input = user_input
         greet(input)
     end
@@ -38,24 +39,26 @@ class CLI
     end
     
     def print_shows
-    
-        shows =["show1", "show2", "show3"]
-        shows.each.with_index(1) do |show, index|
-            puts "#{index}. #{show}"
+        Show.all.each.with_index(1) do |show, index|
+            puts "#{index}. #{show.name}"
         end 
         select_show 
     end 
 
     def select_show
-        puts "Please enter a number from the list to learn more about that Tv show."
+        puts "Please enter the name of the TV show you wish to learn more about."
         selection = user_input
-        show_details(selection) 
+        show = Show.find_by_selection(selection)
+        # puts "input u to see a list or exit to leave."
+        show_details(show) 
         
     end
 
     def show_details(show)
-        puts "#{show}"
+        puts "Name: #{show.name}"
+        puts "Summary: #{show.summary}"
+        puts "genre(s): #{show.genres}"
         menu
-    end 
-          
-end
+    end
+    
+end 

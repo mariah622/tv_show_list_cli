@@ -3,14 +3,10 @@
 class API
     def self.get_data
         response = RestClient.get("http://api.tvmaze.com/shows")
-        list = JSON.parse(response)
-        list.each do |name_list|
-            Show.new(name_list["name"], name_list["summary"], name_list["genres"])
-
+        show_array = JSON.parse(response)
+        show_array.each do |show|
+            Show.new(show)
         end 
-            
-        
-    end
-
+    end 
 end 
 

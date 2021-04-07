@@ -4,10 +4,10 @@ class Show
 
     @@all = []
 
-    def initialize(name, summary, genres)
-        @name = name
-        @summary = summary
-        @genres = genres
+    def initialize(show_hash)
+        show_hash.each do |key, value|
+            self.send("#{key}=", value) if self.respond_to?("#{key}=")
+        end
         save
     end
 
@@ -17,5 +17,11 @@ class Show
 
     def self.all
         @@all
+    end
+    
+    def self.find_by_selection(show_name)
+        self.all.detect do |show|
+            show.name == show_name
+        end 
     end 
 end 
