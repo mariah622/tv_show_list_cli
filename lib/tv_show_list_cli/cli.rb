@@ -8,11 +8,11 @@ class CLI
     end
     
     def user_input
-        gets.strip.capitalize!
+        gets.strip.capitalize
     end 
 
     def greet(name)
-        puts "Hey there #{name}! Let's get started! Will you like to see some TV shows?. Enter Y to see more shows, or enter exit to exit."
+        puts "Hey there #{name}! Let's get started! Will you like to see some TV shows? Enter Y to see more shows, or enter exit to exit."
         menu 
     end 
 
@@ -20,12 +20,16 @@ class CLI
         selection = user_input
         if selection == "Y"
             print_shows
-            menu
         elsif selection == "Exit"
             goodbye
         else 
             invalid 
         end
+    end 
+
+    def back_to_prompt
+        puts "Will you like to see another show? Enter Y to see more shows, or enter exit to exit."
+        menu
     end 
 
 
@@ -35,11 +39,14 @@ class CLI
 
     def invalid
         puts "invalid response. Try again."
-        menu
+        back_to_prompt
     end
     
     def print_shows
         Show.all.each.with_index(1) do |show, index|
+            if (index>90)
+                break;
+            end 
             puts "#{index}. #{show.name}"
         end 
         select_show 
@@ -49,16 +56,15 @@ class CLI
         puts "Please enter the name of the TV show you wish to learn more about."
         selection = user_input
         show = Show.find_by_selection(selection)
-        # puts "input u to see a list or exit to leave."
         show_details(show) 
-        
+
     end
 
     def show_details(show)
-        puts "Name: #{show.name}"
+        puts "Name:#{show.name}"
         puts "Summary: #{show.summary}"
         puts "genre(s): #{show.genres}"
-        menu
+        back_to_prompt
     end
-    
+
 end 
