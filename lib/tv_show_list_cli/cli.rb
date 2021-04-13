@@ -8,7 +8,7 @@ class CLI
     end
     
     def user_input
-        gets.strip.capitalize
+        gets.strip
     end 
 
     def greet(name)
@@ -17,10 +17,11 @@ class CLI
     end 
 
     def menu
+        # binding.pry
         selection = user_input
-        if selection == "Y"
+        if selection.downcase == "y"
             print_shows
-        elsif selection == "Exit"
+        elsif selection.downcase == "exit"
             goodbye
         else 
             invalid 
@@ -28,7 +29,8 @@ class CLI
     end 
 
     def back_to_prompt
-        puts "Will you like to see another show? Enter Y to see more shows, or enter exit to exit."
+        puts "Will you like to see another show? Enter Y to see the list again, or enter exit to exit."
+        # binding.pry
         menu
     end 
 
@@ -44,26 +46,35 @@ class CLI
     
     def print_shows
         Show.all.each.with_index(1) do |show, index|
-            if (index>90)
+            if (index>25)
                 break;
             end 
             puts "#{index}. #{show.name}"
         end 
         select_show 
     end 
-
+    
     def select_show
         puts "Please enter the name of the TV show you wish to learn more about."
         selection = user_input
-        show = Show.find_by_selection(selection)
-        show_details(show) 
-
-    end
-
+        # binding.pry
+        if selection == "Exit"        
+            goodbye
+        elsif Show.find_by_selection(selection) 
+            show = Show.find_by_selection(selection)
+            show_details(show)
+        else 
+            invalid
+        end
+    end 
+    
     def show_details(show)
-        puts "Name:#{show.name}"
-        puts "Summary: #{show.summary}"
-        puts "genre(s): #{show.genres}"
+        puts "Name: #{show.name}"
+        puts "Summary: #{show.summary.gsub(%r{<\w*>|<\/\w*>|<\w*\s\/>}, '')}"
+        puts "Genre(s): "
+        show.genres.each do |genre|
+            puts "#{genre}"
+        end 
         back_to_prompt
     end
 

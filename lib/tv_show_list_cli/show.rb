@@ -21,7 +21,7 @@ class Show
     
     def self.find_by_selection(show_name)
         self.all.detect do |show|
-            show.name == show_name
+            show.name.downcase == show_name.downcase
         end 
     end 
 end 
