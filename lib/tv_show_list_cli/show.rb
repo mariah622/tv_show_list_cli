@@ -1,4 +1,3 @@
-#This class grabs heroes from the our api 
 class Show
     attr_accessor :name, :summary, :genres
 

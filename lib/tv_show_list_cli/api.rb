@@ -1,5 +1,3 @@
-#Application Program Tnterface
-#This class only grabs information from the api and nothing else
 class API
     def self.get_data
         response = RestClient.get("http://api.tvmaze.com/shows")
