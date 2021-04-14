@@ -5,6 +5,7 @@ class API
         show_array.each do |show|
             Show.new(show)
         end 
+      
     end 
 end 
 

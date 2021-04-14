@@ -12,7 +12,7 @@ class CLI
     end 
 
     def greet(name)
-        puts "Hey there #{name}! Let's get started! Will you like to see some TV shows? Enter Y to see more shows, or enter exit to exit."
+        puts "Hey there #{name}! Let's get started! Will you like to see some TV shows? Enter Y to see shows, or enter exit to exit."
         menu 
     end 
 

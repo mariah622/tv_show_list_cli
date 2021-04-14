@@ -1,8 +1,6 @@
 # TvShowListCli
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tv_show_list_cli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Lists popular Tv shows, and provides a summary and genre of the show.
 
 ## Installation
 
@@ -22,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+TODO: To run the program, type ruby bin/run
+
+To see the list of tv shows, you will be prompted by the program to type 'y' to see shows or 'exit' to leave the program. Then you will be prompted to enter the name of the show you wish to learn about. After that, you will again be prompted to see the list again or exit the program!
 
 ## Development
 
